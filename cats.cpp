@@ -16,21 +16,21 @@ Cat::Cat(std::string name, breeds breed, Home* homePtr, std::mutex* catMutexPtr)
 
 void Cat::beingACat() {
 	while(true) {
-		if(inHome == false) {
+		if(inHome) {
 			if( rand() % 100 < 1) {
-				catMutexPtr_->lock();
-				goToHome();
-				catMutexPtr_->unlock();
-			} else {
-				std::this_thread::sleep_for(std::chrono::milliseconds(1));
-			}
-		} else {
-			if( rand() % 100 < 5) {
 				catMutexPtr_->lock();
 				goOutside();
 				catMutexPtr_->unlock();
 			}
 			else {
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
+			}
+		} else {
+			if( rand() % 100 < 5) {
+				catMutexPtr_->lock();
+				goToHome();
+				catMutexPtr_->unlock();
+			} else {
 				std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			}
 		}
@@ -52,4 +52,8 @@ void Cat::goOutside() {
 		}
 	}
 	//std::cout << name_ << " go away :c" << std::endl;
+}
+
+void Cat::makeCatSound() {
+	std::cout << name_ << ": " << "Meow :3" << std::endl;
 }

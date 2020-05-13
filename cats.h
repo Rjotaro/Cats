@@ -20,6 +20,8 @@ class Cat {
 
 	Cat(std::string, breeds, Home*, std::mutex*);
 	
+	void makeCatSound();
+	
 	private:
 	
 	Home* const homePtr_;

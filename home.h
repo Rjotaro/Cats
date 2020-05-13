@@ -4,6 +4,8 @@
 class Home {
 	public:
 	
+	Home();
+	
 	std::vector<Cat*> catsInHome;
 };
 

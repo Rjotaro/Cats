@@ -8,4 +8,7 @@ class Player {
 	Player(Home*);
 	
 	void inputCommand();
+	void findCatsInHome();
+	Cat* selectCatByName(std::string);
+	void playWithCat(Cat*);
 };
