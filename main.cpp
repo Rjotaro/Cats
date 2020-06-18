@@ -1,4 +1,6 @@
-#include "player.h"
+#include "cats.hpp"
+#include "home.hpp"
+#include "player.hpp"
 
 int main() {
 	Home home;

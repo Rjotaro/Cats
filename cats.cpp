@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <chrono>
-#include "home.h"
+#include "cats.hpp"
+#include "home.hpp"
 
 Cat::Cat(std::string name, breeds breed, Home* homePtr, std::mutex* catMutexPtr) : 
 	name_  {name},
@@ -17,7 +18,7 @@ Cat::Cat(std::string name, breeds breed, Home* homePtr, std::mutex* catMutexPtr)
 void Cat::beingACat() {
 	while(true) {
 		if(inHome) {
-			if( rand() % 100 < 1) {
+			if( rand() % 100 < 0) {
 				catMutexPtr_->lock();
 				goOutside();
 				catMutexPtr_->unlock();

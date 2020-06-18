@@ -1,5 +1,7 @@
-#include "player.h"
 #include <iostream>
+#include "cats.hpp"
+#include "home.hpp"
+#include "player.hpp"
 
 Player::Player(Home* homePtr) : homePtr_ {homePtr} {
 	inputCommand();
@@ -62,7 +64,6 @@ Cat* Player::selectCatByName(std::string name) {
 	for(auto i = 0; homePtr_->catsInHome.size(); i++) {
 		if(homePtr_->catsInHome[i]->name_ == name) {
 			return homePtr_->catsInHome[i];
-			break;
 		}
 	}
 	return nullptr;
