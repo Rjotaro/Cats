@@ -52,9 +52,9 @@ void Player::findCatsInHome() {
 		}
 }
 
-void Player::playWithCat(Cat* cat) {
-	if(cat != nullptr) {
-		cat->makeCatSound();
+void Player::playWithCat(Cat* catPtr) {
+	if(catPtr != nullptr) {
+		catPtr->makeCatSound();
 	} else {
 		std::cout << "Can't find cat." << std::endl;
 	}

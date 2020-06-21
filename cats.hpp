@@ -1,6 +1,5 @@
 #ifndef CATS_HPP
 #define CATS_HPP
-
 #include <string>
 #include <mutex>
 #include <thread>
@@ -21,7 +20,7 @@ class Cat {
 	const std::string name_;
 	const breeds breed_;
 
-	Cat(std::string, breeds, Home*, std::mutex*);
+	Cat(std::string, breeds, Home*, std::mutex*, short int, short int);
 	
 	void makeCatSound();
 	
@@ -31,6 +30,8 @@ class Cat {
 	bool inHome;
 	std::thread thread_;
 	std::mutex* catMutexPtr_;
+	const short int chanceToArive_;
+	const short int stayTime_;
 	
 	void beingACat();
 	void goOutside();
