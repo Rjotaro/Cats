@@ -8,6 +8,8 @@ class Cat;
 class Home {
 	public:
 	
+	short int catFood_;
+	
 	Home();
 	
 	std::vector<Cat*> catsInHome;
