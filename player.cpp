@@ -10,34 +10,27 @@ Player::Player(Home* homePtr) : homePtr_ {homePtr} {
 void Player::inputCommand() {
 	while(true) {
 		std::cout << "Please, enter the command (h (help) for list of all commands):" << std::endl;
-		char command;
+		std::string command;
 		std::string name;
 		std::cin >> command;
 		
-		switch(command) {
-			case 'h':
-				std::cout << "f - (find) all cats in home." << std::endl;
-				std::cout << "p - (play) with cat." << std::endl;
-				std::cout << "c - (clear) screen." << std::endl;
-				std::cout << "e - (exit) from game." << std::endl;
-				break;
-			case 'f':
+		if(command == "h") {
+			std::cout << "f - (find) all cats in home." << std::endl;
+			std::cout << "p - (play) with cat." << std::endl;
+			std::cout << "c - (clear) screen." << std::endl;
+			std::cout << "e - (exit) from game." << std::endl;
+		} else if (command == "f") {
 				findCatsInHome();
-				break;
-			case 'p':
+		} else if (command == "p") {
 				std::cout << "Input cat name." << std::endl;
 				std::cin >> name;
 				playWithCat(selectCatByName(name));
-				break;
-			case 'c':
+		} else if (command == "c") {
 				std::cout << "\x1B[2J\x1B[H";
-				break;
-			case 'e':
+		} else if (command == "e") {
 				std::exit(EXIT_SUCCESS);
-				break;
-			default:
+		} else {
 				std::cout << "Incorrect command." << std::endl;
-				break;
 		}
 	}
 }
