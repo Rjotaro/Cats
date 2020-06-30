@@ -20,7 +20,7 @@ class Cat {
 	const std::string name_;
 	const breeds breed_;
 
-	Cat(std::string, breeds, Home*, std::mutex*, short int, short int);
+	Cat(std::string, breeds, Home*, short int, short int);
 	
 	void makeCatSound();
 	
@@ -29,7 +29,7 @@ class Cat {
 	Home* const homePtr_;
 	bool inHome;
 	std::thread thread_;
-	std::mutex* catMutexPtr_;
+	inline static std::mutex catMutex_;
 	const short int chanceToArive_;
 	const short int stayTime_;
 	

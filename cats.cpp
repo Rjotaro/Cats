@@ -5,18 +5,16 @@
 #include "home.hpp"
 
 Cat::Cat(std::string name,
-		 breeds breed, 
-		 Home* homePtr, 
-		 std::mutex* catMutexPtr,
-		 short int chanceToArive,
-		 short int stayTime) :
-		 
-	name_  {name},
-	breed_ {breed},
-	homePtr_ {homePtr},
-	catMutexPtr_ {catMutexPtr},
-	chanceToArive_ {chanceToArive},
-	stayTime_ {stayTime} 
+	     breeds breed, 
+	     Home* homePtr,
+	     short int chanceToArive,
+         short int stayTime):
+         
+	     name_  {name},
+	     breed_ {breed},
+	     homePtr_ {homePtr},
+	     chanceToArive_ {chanceToArive},
+	     stayTime_ {stayTime} 
 {
 	inHome = false;
 	
@@ -41,23 +39,23 @@ void Cat::beingACat() {
 }
 
 void Cat::goToHome() {
-	catMutexPtr_->lock();
+	this->catMutex_.lock();
 	inHome = true;
 	homePtr_->catsInHome.push_back(this);
-	catMutexPtr_->unlock();
+	this->catMutex_.unlock();
 	//std::cout << name_ << " in home!" << std::endl;
 }
 
 void Cat::goOutside() {
 	inHome = false;
-	catMutexPtr_->lock();
+	this->catMutex_.lock();
 	for(auto i = 0; homePtr_->catsInHome.size(); i++) {
 		if(homePtr_->catsInHome[i]->name_ == name_) {
 			homePtr_->catsInHome.erase(homePtr_->catsInHome.begin() + i);
 			break;
 		}
 	}
-	catMutexPtr_->unlock();
+	this->catMutex_.unlock();
 	//std::cout << name_ << " go away :c" << std::endl;
 }
 
