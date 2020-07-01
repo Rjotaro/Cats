@@ -1,9 +1,10 @@
 #include <iostream>
+
 #include "cats.hpp"
 #include "home.hpp"
 #include "player.hpp"
 
-Player::Player(Home* homePtr) : homePtr_ {homePtr} {
+Player::Player() {
 	inputCommand();
 }
 
@@ -13,7 +14,7 @@ void Player::inputCommand() {
 		std::string command;
 		std::string name;
 		std::cin >> command;
-		
+
 		if(command == "h") {
 			std::cout << "f - (find) all cats in home." << std::endl;
 			std::cout << "p - (play) with cat." << std::endl;
@@ -36,10 +37,10 @@ void Player::inputCommand() {
 }
 
 void Player::findCatsInHome() {
-	if(homePtr_->catsInHome.size() == 0) {
+	if(home_.catsInHome_.size() == 0) {
 		std::cout << "No cats in our home :c" << std::endl;
 		} else {
-			for(auto i : homePtr_->catsInHome) {
+			for(auto i : home_.catsInHome_) {
 				std::cout << i->name_ << std::endl;
 			}
 		}
@@ -54,9 +55,9 @@ void Player::playWithCat(Cat* catPtr) {
 }
 
 Cat* Player::selectCatByName(std::string name) {
-	for(auto i = 0; homePtr_->catsInHome.size(); i++) {
-		if(homePtr_->catsInHome[i]->name_ == name) {
-			return homePtr_->catsInHome[i];
+	for(auto i = 0; home_.catsInHome_.size(); i++) {
+		if(home_.catsInHome_[i]->name_ == name) {
+			return home_.catsInHome_[i];
 		}
 	}
 	return nullptr;

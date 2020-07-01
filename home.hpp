@@ -7,12 +7,21 @@ class Cat;
 
 class Home {
 	public:
-	
+
 	short int catFood_;
-	
+	std::vector<Cat*> catsInHome_;
+
+	static Home& getInstance() {
+		static Home instance;
+		return instance;
+	}
+
+	Home(Home const&) = delete;
+  void operator=(Home const&) = delete;
+
+	private:
+
 	Home();
-	
-	std::vector<Cat*> catsInHome;
 };
 
 #endif

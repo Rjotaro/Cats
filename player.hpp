@@ -3,16 +3,17 @@
 
 #include <iostream>
 
-class Home;
+#include "home.hpp"
+
 class Cat;
 
 class Player {
 	public:
-	
-	Home* homePtr_;
-	
-	Player(Home*);
-	
+
+	inline static Home& home_ = Home::getInstance();
+
+	Player();
+
 	void inputCommand();
 	void findCatsInHome();
 	Cat* selectCatByName(std::string);
