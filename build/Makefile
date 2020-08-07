@@ -1,6 +1,6 @@
 SRC_PATH = ../src
 INC_PATH = ../include
-CXX = g++-10
+CXX = g++-10 # Remove if you haven't g++ 10 or use another compiler by default
 
 cats: ${INC_PATH}/cats.hpp
 	$(CXX) -std=c++2a -I../include -Wall -Wextra -Werror -pthread -O2 -c ${SRC_PATH}/cats.cpp

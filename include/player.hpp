@@ -11,7 +11,7 @@ class Cat;
 class Player {
 	public:
 
-	inline static auto home_ = Home::getInstance();
+	inline static auto home_ = Home::getInstance(); // inline because without it doen't work
 
 	Player();
 

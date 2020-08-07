@@ -30,7 +30,7 @@ void Player::inputCommand() {
 		} else if (command == "fill") {
 				fillCatsBow();
 		} else if (command == "clear") {
-				std::cout << "\x1B[2J\x1B[H";
+				std::cout << "\x1B[2J\x1B[H"; // Yeah, it's clean terminal on Linux/bash.
 		} else if (command == "exit") {
 				std::exit(EXIT_SUCCESS);
 		} else {
@@ -50,7 +50,7 @@ void Player::findCatsInHome() {
 }
 
 std::shared_ptr<Cat> Player::selectCatByName(std::string name) {
-	for(short int i = 0; home_->catsInHome_.size(); i++) {
+	for(short i = 0; home_->catsInHome_.size(); i++) {
 		if(home_->catsInHome_[i]->name_ == name) {
 			return home_->catsInHome_[i];
 		}
