@@ -17,9 +17,9 @@ class Player {
 
 	void inputCommand();
 	void findCatsInHome();
+	void playWithCat(std::shared_ptr<Cat>);
 	std::shared_ptr<Cat> selectCatByName(std::string);
 	void fillCatsBow();
-	void playWithCat(std::shared_ptr<Cat>);
 };
 
 #endif

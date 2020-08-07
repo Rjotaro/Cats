@@ -8,6 +8,8 @@
 
 #include "home.hpp"
 
+inline std::mutex catMutex;
+
 class Cat : public std::enable_shared_from_this<Cat> {
 public:
 	enum class breeds {
@@ -24,6 +26,7 @@ public:
 
 	Cat(std::string, breeds, short, short);
 
+
 	void makeCatSound();
 
 private:
@@ -33,7 +36,7 @@ private:
 	inline static auto home_ = Home::getInstance(); // inline because without it doen't work
 	bool inHome_;
 	std::thread thread_;
-	inline static std::mutex catMutex_; // inline because without it doen't work
+	//inline static std::mutex catMutex;
 
 	void beingACat();
 	void goOutside();

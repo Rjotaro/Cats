@@ -8,7 +8,7 @@ class Cat;
 
 class Home {
 public:
-	short catFood_ {0};
+	unsigned short catFood_ {0};
 	std::vector<std::shared_ptr<Cat>> catsInHome_;
 
   // All shit below for making Home class singltone

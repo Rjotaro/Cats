@@ -5,6 +5,8 @@
 #include "cats.hpp"
 #include "home.hpp"
 
+extern std::mutex catMutex;
+
 Cat::Cat(std::string name,
 	     breeds breed,
 	     short int chanceToArive,
@@ -26,27 +28,26 @@ void Cat::beingACat() {
 			for(short int i = stayTime_; i > 0; i--) {
 				std::this_thread::sleep_for(std::chrono::seconds(1));
 			}
+			catMutex.lock();
 			goOutside();
+			catMutex.unlock();
 		} else {
-			if( chanceToArive_ == rand() % 100 ) {
-			goToHome();
-			} else {
-				std::this_thread::sleep_for(std::chrono::seconds(1));
-			}
+			if(chanceToArive_ == rand() % 100) {
+				catMutex.lock();
+				goToHome();
+				catMutex.unlock();
+			} else std::this_thread::sleep_for(std::chrono::seconds(1));
 		}
 	}
 }
 
 void Cat::goToHome() {
-	catMutex_.lock();
 	home_->catsInHome_.push_back(shared_from_this());
 	inHome_ = true;
-	catMutex_.unlock();
 //	std::cout << name_ << " in home!" << std::endl;
 }
 
 void Cat::goOutside() {
-	catMutex_.lock();
 	for(auto i = 0; home_->catsInHome_.size(); i++) {
 		if(home_->catsInHome_[i]->name_ == name_) {
 			home_->catsInHome_.erase(home_->catsInHome_.begin() + i);
@@ -54,7 +55,6 @@ void Cat::goOutside() {
 			return;
 		}
 	}
-	catMutex_.unlock();
 //	std::cout << name_ << " go away :c" << std::endl;
 }
 

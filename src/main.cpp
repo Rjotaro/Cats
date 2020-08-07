@@ -4,6 +4,8 @@
 #include "home.hpp"
 #include "player.hpp"
 
+extern std::mutex catMutex;
+
 int main() {
 	srand(0); // Random for all game process
 
