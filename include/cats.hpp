@@ -21,6 +21,7 @@ enum class Breeds {
 
 struct Stats {
     const unsigned char chanceToArive_;
+    const unsigned char walkTime_;
     const unsigned char stayTime_;
     int                 visits_ = 0;
 };
@@ -31,7 +32,6 @@ public:
     const Breeds breed_;
 
     Cat(std::string, Breeds, Stats);
-
 
     void makeCatSound();
 

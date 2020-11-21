@@ -22,19 +22,26 @@ Cat::Cat(std::string name,
 void Cat::beingACat() {
     while(true) {
         if(inHome_) {
-            for(short int i = stats_.stayTime_; i > 0; i--) {
+            for(unsigned char i = stats_.stayTime_; i > 0; i--) {
                 std::this_thread::sleep_for(std::chrono::seconds(1));
             }
+            
             catMutex.lock();
             goOutside();
             catMutex.unlock();
         } else {
-            if(stats_.chanceToArive_ == rand() % 100) {
-                catMutex.lock();
-                stats_.visits_++;
-                goToHome();
-                catMutex.unlock();
-            } else std::this_thread::sleep_for(std::chrono::seconds(1));
+            for(unsigned char i = stats_.walkTime_; i > 0; i--) {
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+            }
+            
+            while(stats_.chanceToArive_ != rand() % 100) {
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+            }
+            
+            catMutex.lock();
+            stats_.visits_++;
+            goToHome();
+            catMutex.unlock();
         }
     }
 }
@@ -50,10 +57,10 @@ void Cat::goOutside() {
         if(home_->catsInHome_[i] == shared_from_this()) {
             home_->catsInHome_.erase(home_->catsInHome_.begin() + i);
             inHome_ = false;
+            std::cout << "  " << name_ << " go away :c" << std::endl;
             return;
         }
     }
-    std::cout << "  " << name_ << " go away :c" << std::endl;
 }
 
 void Cat::makeCatSound() {
