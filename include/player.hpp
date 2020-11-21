@@ -9,17 +9,17 @@
 class Cat;
 
 class Player {
-	public:
+    public:
 
-	inline static auto home_ = Home::getInstance(); // inline because without it doen't work
+    inline static auto home_ = Home::getInstance(); // inline because without it doen't work
 
-	Player();
+    Player();
 
-	void inputCommand();
-	void findCatsInHome();
-	void playWithCat(std::shared_ptr<Cat>);
-	std::shared_ptr<Cat> selectCatByName(std::string);
-	void fillCatsBow();
+    void inputCommand();
+    void findCatsInHome();
+    void playWithCat(std::shared_ptr<Cat>);
+    std::shared_ptr<Cat> selectCatByName(std::string);
+    void fillCatsBow();
 };
 
 #endif

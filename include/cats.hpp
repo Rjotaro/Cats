@@ -10,37 +10,42 @@
 
 inline std::mutex catMutex;
 
+enum class Breeds {
+        mongrel,
+        turkishAngora,
+        scottishFold,
+        arabianMau,
+        russianBlue,
+        khaoManee
+};
+
+struct Stats {
+    const unsigned char chanceToArive_;
+    const unsigned char stayTime_;
+    int                 visits_ = 0;
+};
+
 class Cat : public std::enable_shared_from_this<Cat> {
 public:
-	enum class breeds {
-	    mongrel,
-	    turkishAngora,
-	    scottishFold,
-	    arabianMau,
-	    russianBlue,
-	    khaoManee
-	};
+    const std::string name_;
+    const Breeds breed_;
 
-	const std::string name_;
-	const breeds breed_;
-
-	Cat(std::string, breeds, short, short);
+    Cat(std::string, Breeds, Stats);
 
 
-	void makeCatSound();
+    void makeCatSound();
 
 private:
-	const short int chanceToArive_;
-	const short int stayTime_;
+    Stats stats_;
 
-	inline static auto home_ = Home::getInstance(); // inline because without it doen't work
-	bool inHome_;
-	std::thread thread_;
-	//inline static std::mutex catMutex;
+    inline static auto home_ = Home::getInstance(); // inline because without it doen't work
+    bool inHome_;
+    std::thread thread_;
+    //inline static std::mutex catMutex;
 
-	void beingACat();
-	void goOutside();
-	void goToHome();
+    void beingACat();
+    void goOutside();
+    void goToHome();
 };
 
 #endif
