@@ -2,8 +2,8 @@
 
 SRC_PATH = ../src
 INC_PATH = ../include
-CXX = g++-10 # Remove if you haven't g++ 10 or use another compiler by default
-CXXFLAGS = -std=c++2a -I../include -Wall -Wextra -Werror -pthread -O2
+CXX = g++ # Remove if you haven't g++ 10 or use another compiler by default
+CXXFLAGS = -std=c++17 -I../include -Wall -Wextra -pthread -O2
 
 all: cats
 
