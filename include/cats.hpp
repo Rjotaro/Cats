@@ -8,7 +8,7 @@
 
 #include "home.hpp"
 
-inline std::mutex catMutex;
+inline std::mutex cat_mutex;
 
 enum class Breeds {
         mongrel,
@@ -20,32 +20,32 @@ enum class Breeds {
 };
 
 struct Stats {
-    const unsigned char chanceToArive_;
-    const unsigned char walkTime_;
-    const unsigned char stayTime_;
-    int                 visits_ = 0;
+    const unsigned char chance_to_arive;
+    const unsigned char walktime;
+    const unsigned char staytime;
+    int                 visits = 0;
 };
 
 class Cat : public std::enable_shared_from_this<Cat> {
 public:
-    const std::string name_;
-    const Breeds breed_;
+    const std::string name;
+    const Breeds breed;
 
     Cat(std::string, Breeds, Stats);
 
     void makeCatSound();
 
 private:
-    Stats stats_;
+    Stats stats;
 
-    inline static auto home_ = Home::getInstance(); // inline because without it doen't work
-    bool inHome_;
-    std::thread thread_;
+    inline static auto home = Home::get_instance(); // inline because without it doen't work
+    bool in_home;
+    std::thread thread;
     //inline static std::mutex catMutex;
 
-    void beingACat();
-    void goOutside();
-    void goToHome();
+    void being_a_cat();
+    void go_outside();
+    void go_to_home();
 };
 
 #endif

@@ -4,65 +4,65 @@
 #include "cats.hpp"
 #include "home.hpp"
 
-extern std::mutex catMutex;
+extern std::mutex cat_mutex;
 
 Cat::Cat(std::string name,
          Breeds      breed,
          Stats       stats):
 
-         name_  {name},
-         breed_ {breed},
-         stats_ {stats}
+         name  {name},
+         breed {breed},
+         stats {stats}
 {
-    inHome_ = false;
+    in_home = false;
 
-    thread_ = std::thread(&Cat::beingACat, this);
+    thread = std::thread(&Cat::being_a_cat, this);
 }
 
-void Cat::beingACat() {
+void Cat::being_a_cat() {
     while(true) {
-        if(inHome_) {
-            for(unsigned char i = stats_.stayTime_; i > 0; i--) {
+        if(in_home) {
+            for(unsigned char i = stats.staytime; i > 0; i--) {
                 std::this_thread::sleep_for(std::chrono::seconds(1));
             }
             
-            catMutex.lock();
-            goOutside();
-            catMutex.unlock();
+            cat_mutex.lock();
+            go_outside();
+            cat_mutex.unlock();
         } else {
-            for(unsigned char i = stats_.walkTime_; i > 0; i--) {
+            for(unsigned char i = stats.walktime; i > 0; i--) {
                 std::this_thread::sleep_for(std::chrono::seconds(1));
             }
             
-            while(stats_.chanceToArive_ != rand() % 100) {
+            while(stats.chance_to_arive != rand() % 100) {
                 std::this_thread::sleep_for(std::chrono::seconds(1));
             }
             
-            catMutex.lock();
-            stats_.visits_++;
-            goToHome();
-            catMutex.unlock();
+            cat_mutex.lock();
+            stats.visits++;
+            go_to_home();
+            cat_mutex.unlock();
         }
     }
 }
 
-void Cat::goToHome() {
-    home_->catsInHome_.push_back(shared_from_this());
-    inHome_ = true;
-    std::cout << "  " << name_ << " in home!" << std::endl;
+void Cat::go_to_home() {
+    home->cats_in_home.push_back(shared_from_this());
+    in_home = true;
+    std::cout << "  " << name << " in home!" << std::endl;
 }
 
-void Cat::goOutside() {
-    for(auto i = 0; home_->catsInHome_.size(); i++) {
-        if(home_->catsInHome_[i] == shared_from_this()) {
-            home_->catsInHome_.erase(home_->catsInHome_.begin() + i);
-            inHome_ = false;
-            std::cout << "  " << name_ << " go away :c" << std::endl;
+void Cat::go_outside() {
+    for(auto i = 0; home->cats_in_home.size(); i++) {
+        if(home->cats_in_home[i] == shared_from_this()) {
+            home->cats_in_home.erase(home->cats_in_home.begin() + i);
+            in_home = false;
+            std::cout << "  " << name << " go away :c" << std::endl;
             return;
         }
     }
 }
 
 void Cat::makeCatSound() {
-    std::cout << "  " << name_ << ": " << "Meow :3" << std::endl;
+    std::cout << "  " << name << ": " << "Meow :3" << std::endl;
 }

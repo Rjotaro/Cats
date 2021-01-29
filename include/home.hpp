@@ -8,11 +8,11 @@ class Cat;
 
 class Home {
 public:
-    unsigned short catFood_ {0};
-    std::vector<std::shared_ptr<Cat>> catsInHome_;
+    unsigned short cat_food {0};
+    std::vector<std::shared_ptr<Cat>> cats_in_home;
 
-  // All shit below for making Home class singltone
-    static std::shared_ptr<Home> getInstance() {
+    // All shit below for making Home class singltone
+    static std::shared_ptr<Home> get_instance() {
         static auto instance = std::shared_ptr<Home>(new Home);
       return instance;
     }

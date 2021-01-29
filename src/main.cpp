@@ -4,7 +4,7 @@
 #include "home.hpp"
 #include "player.hpp"
 
-extern std::mutex catMutex;
+//extern std::mutex cat_mutex;
 
 void init() {
     srand(0); // Random for all game process
@@ -13,8 +13,8 @@ void init() {
     auto snowball = std::make_shared<Cat>("Snowball", Breeds::turkishAngora, Stats {5, 5, 5});
     auto socks = std::make_shared<Cat>("Socks", Breeds::scottishFold, Stats {3, 5, 5});
     // All "cats" just pointers on cats because their methos use shared_from_this();
-
-    Player player;
+    
+    input_command(Player::get_instance());
 }
 
 int main() {
