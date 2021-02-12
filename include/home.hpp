@@ -17,8 +17,13 @@ public:
       return instance;
     }
 
+    Home(Home&&) =      delete;
     Home(Home const&) = delete;
+    
+    void operator=(Home&&) =      delete;
     void operator=(Home const&) = delete;
+    
+    ~Home() = default;
 
 private:
     Home() = default;
