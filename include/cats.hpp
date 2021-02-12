@@ -12,11 +12,11 @@ inline std::mutex cat_mutex;
 
 enum class Breeds {
         mongrel,
-        turkishAngora,
-        scottishFold,
-        arabianMau,
-        russianBlue,
-        khaoManee
+        turkish_angora,
+        scottish_fold,
+        arabian_mau,
+        russian_blue,
+        khao_manee
 };
 
 struct Stats {
@@ -33,7 +33,7 @@ public:
 
     Cat(std::string, Breeds, Stats);
 
-    void makeCatSound();
+    void make_cat_sound();
 
 private:
     Stats stats;
@@ -44,6 +44,8 @@ private:
     //inline static std::mutex catMutex;
 
     void being_a_cat();
+    void staying_at_home();
+    void walk();
     void go_outside();
     void go_to_home();
 };
