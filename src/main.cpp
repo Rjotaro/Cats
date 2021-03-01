@@ -8,7 +8,7 @@
 //extern std::mutex cat_mutex;
 
 void init() {
-    auto pepper   = std::make_shared<Cat>("Pepper", Breeds::mongrel, Stats {3, 5, 5});
+    auto pepper   = std::make_shared<Cat>("Pepper", Breeds::mongrel, Stats {50, 5, 15});
     auto snowball = std::make_shared<Cat>("Snowball", Breeds::turkish_angora, Stats {5, 5, 5});
     auto socks    = std::make_shared<Cat>("Socks", Breeds::scottish_fold, Stats {3, 5, 5});
     // All "cats" just pointers on cats because their methos use shared_from_this();

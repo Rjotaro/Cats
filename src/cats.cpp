@@ -24,18 +24,24 @@ Cat::Cat(std::string name,
 
 void Cat::being_a_cat() {
     while(true) {
-        if(in_home) staying_at_home();
-        else walk();
+        walk();
+        
+        cat_mutex.lock();
+        stats.visits++;
+        go_to_home();
+        cat_mutex.unlock();
+        
+        staying_at_home();
+        
+        cat_mutex.lock();
+        go_outside();
+        cat_mutex.unlock();
     }
 }
 
 void Cat::staying_at_home() {
     for(unsigned char i = stats.staytime; i > 0; i--) 
         std::this_thread::sleep_for(std::chrono::seconds(1));
-            
-    cat_mutex.lock();
-    go_outside();
-    cat_mutex.unlock();
 }
 
 void Cat::walk() {
@@ -44,28 +50,20 @@ void Cat::walk() {
     
     std::uniform_int_distribution<> distrib(0, 99);
             
-    while(stats.chance_to_arive != distrib(mersenne))
+    while(stats.chance_to_arive < distrib(mersenne))
         std::this_thread::sleep_for(std::chrono::seconds(1));
-            
-    cat_mutex.lock();
-    stats.visits++;
-    go_to_home();
-    cat_mutex.unlock();
 }
 
 void Cat::go_to_home() {
     home->cats_in_home.push_back(shared_from_this());
-    in_home = true;
-    std::cout << std::endl << "  " << name << " in home!" << std::endl;
+    //std::cout << std::endl << "  " << name << " in home!" << std::endl << "> ";
 }
 
 void Cat::go_outside() {
     auto i = std::find(std::begin(home->cats_in_home), std::end(home->cats_in_home), shared_from_this());
     if(i != std::end(home->cats_in_home)) {
         home->cats_in_home.erase(i);
-        in_home = false;
-        std::cout << std::endl << "  " << name << " go away :c" << std::endl;
-        return;
+        //std::cout << std::endl << "  " << name << " go away :c" << std::endl << "> ";
     }
 }
 

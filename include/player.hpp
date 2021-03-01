@@ -14,13 +14,14 @@ public:
 
     inline static auto home = Home::get_instance(); // inline because without it doen't work
     
-    static Player* get_instance() {
-        static auto instance = new Player;
+    static std::shared_ptr<Player> get_instance() {
+        static auto instance = std::shared_ptr<Player>(new Player);
         return instance;
     }
     
     Player(Player&&)      = delete;
     Player(Player const&) = delete;
+    ~Player() = default;
     
     void operator=(Player&&)      = delete;
     void operator=(Player const&) = delete;
@@ -31,14 +32,13 @@ public:
 
 private:
     Player()  = default;
-    ~Player() = default;
 //  void fillCatsBow();
 };
 
-void input_command(Player* player);
-void command_help(Player* player);
-void command_find(Player* player);
-void command_play(Player* player);
-void command_exit(Player* player);
+void input_command(std::shared_ptr<Player> player);
+void command_help(std::shared_ptr<Player> player);
+void command_find(std::shared_ptr<Player> player);
+void command_play(std::shared_ptr<Player> player);
+void command_exit(std::shared_ptr<Player> player);
 
 #endif
