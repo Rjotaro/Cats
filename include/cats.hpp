@@ -26,12 +26,13 @@ struct Stats {
     int                 visits = 0;
 };
 
-class Cat : public std::enable_shared_from_this<Cat> {
+class Cat final : public std::enable_shared_from_this<Cat> {
 public:
     const std::string name;
     const Breeds breed;
 
     Cat(std::string, Breeds, Stats);
+    ~Cat() = default;
 
     void make_cat_sound();
 

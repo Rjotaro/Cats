@@ -5,7 +5,7 @@
 #include "home.hpp"
 #include "player.hpp"
 
-std::unordered_map<std::string, std::function<void(std::shared_ptr<Player>)>> commands {
+std::unordered_map<std::string, std::function<void(Player*)>> commands {
     {"help", command_help},
     {"find", command_find},
     {"play", command_play},
@@ -13,14 +13,14 @@ std::unordered_map<std::string, std::function<void(std::shared_ptr<Player>)>> co
 };
 
 void Player::find_cats_in_home() {
-    if(home_->cats_in_home.size() != 0)
-        for(auto i : home_->cats_in_home) std::cout << "  " << i->name << std::endl;
+    if(home->cats_in_home.size() != 0)
+        for(auto i : home->cats_in_home) std::cout << "  " << i->name << std::endl;
     else std::cout << std::endl << "No cats in our home :c" << std::endl;
 }
 
 std::shared_ptr<Cat> Player::select_cat(std::string name) {
-    if(home_->cats_in_home.size() != 0)
-        for(auto i : home_->cats_in_home)
+    if(home->cats_in_home.size() != 0)
+        for(auto i : home->cats_in_home)
             if(i->name == name) return i;
             
     return nullptr;
@@ -37,7 +37,7 @@ void Player::play_with_cat() {
 }
 
 
-void input_command(std::shared_ptr<Player> player) {
+void input_command(Player* player) {
     std::cout << std::endl << "Please, enter the commands ((help) for list of all commands):" << std::endl;
     
     std::string command;
@@ -48,7 +48,7 @@ void input_command(std::shared_ptr<Player> player) {
     }
 }
 
-void command_help(std::shared_ptr<Player> player) {
+void command_help(Player* player) {
     std::cout << std::endl;
     std::cout << "  (find) all cats in home." << std::endl;
     std::cout << "  (play) with cat." << std::endl;
@@ -58,16 +58,16 @@ void command_help(std::shared_ptr<Player> player) {
     std::cout << std::endl;
 }
 
-void command_find(std::shared_ptr<Player> player) {
+void command_find(Player* player) {
     player->find_cats_in_home();
 }
 
-void command_play(std::shared_ptr<Player> player) {
+void command_play(Player* player) {
     cat_mutex.lock();
     player->play_with_cat();
     cat_mutex.unlock();
 }
 
-void command_exit(std::shared_ptr<Player> player) {
+void command_exit(Player* player) {
     std::exit(EXIT_SUCCESS);
 }
