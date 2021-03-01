@@ -3,7 +3,7 @@ Do you like cats? Do you like terminal? Do you like multithreading?
 This game for you!
 
 # How to install?
-Just copy this repository, enter in "build" directory and input "make build" command.
+Just copy this repository, enter in "build" directory and input "make" command.
 (Yes, this game for now building only with Makefile.
 If you know how write cmake files and want help me with this project, I'll ready get your help!)
 
